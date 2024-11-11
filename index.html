@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burger King Virtual Ordering System</title>
+  <style>
+    /* Basic page styling */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    #order-id {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-weight: bold;
+      color: #ff4500;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ff4500;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #cc3700;
+    }
+
+    #food-selection {
+      margin-top: 20px;
+    }
+
+    .loading {
+      font-size: 20px;
+      color: #555;
+      margin: 20px 0;
+      display: none;
+    }
+
+    #food-images img {
+      width: 100px;
+      margin: 10px;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to Burger King</h1>
+  <div id="order-id"></div>
+
+  <div class="container">
+    <button id="order-btn">Order Food</button>
+
+    <div id="food-selection">
+      <label><input type="checkbox" value="Burger"> Burger</label>
+      <label><input type="checkbox" value="Fries"> Fries</label>
+      <label><input type="checkbox" value="Drink"> Drink</label>
+    </div>
+
+    <div id="loading" class="loading">Preparing your order...</div>
+    <div id="food-images"></div>
+  </div>
+
+  <script>
+    document.getElementById('order-btn').addEventListener('click', () => {
+      const selectedItems = [];
+      document.querySelectorAll('#food-selection input[type="checkbox"]:checked').forEach(checkbox => {
+        selectedItems.push(checkbox.value);
+      });
+
+      if (selectedItems.length === 0) {
+        alert('Please select at least one item!');
+        return;
+      }
+
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('food-images').innerHTML = '';
+      document.getElementById('order-id').textContent = '';
+
+      // Simulate random preparation time (2 to 5 seconds)
+      const delay = Math.floor(Math.random() * 4 + 2) * 1000;
+
+      new Promise(resolve => setTimeout(resolve, delay)).then(() => {
+        document.getElementById('loading').style.display = 'none';
+
+        // Display selected food item images
+        selectedItems.forEach(item => {
+          const img = document.createElement('img');
+          img.src = ${item.toLowerCase()}.png;  // Assumes images named "burger.png", "fries.png", etc.
+          img.alt = item;
+          document.getElementById('food-images').appendChild(img);
+        });
+
+        // Display a unique order ID
+        const orderId = Order #${Math.floor(Math.random() * 10000)};
+        document.getElementById('order-id').textContent = orderId;
+      });
+    });
+  </script>
+
+</body>
+</html>
